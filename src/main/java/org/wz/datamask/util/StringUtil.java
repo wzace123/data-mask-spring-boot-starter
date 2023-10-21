@@ -1,28 +1,19 @@
-package org.wz.datamask.handle;
+package org.wz.datamask.util;
 
+public class StringUtil {
 
-/**
- * 屏蔽敏感字段处理器
- */
-public class DataMaskAdapter implements DataMaskHandler {
-
-    @Override
-    public String doMask(String fieldValue) {
-        throw new RuntimeException();
-    }
-
-    protected String maskStr(String str,int front,int end) {
+    public static String maskStr(String str,int front,int end) {
         if (!isBlank(str) && front + end < str.length()) {
             return front >= 0 && end >= 0 ? hide(str, front, str.length() - end) : "";
         }
         return "";
     }
 
-    protected String hide(CharSequence str, int startInclude, int endExclude) {
+    public static String hide(CharSequence str, int startInclude, int endExclude) {
         return replace(str, startInclude, endExclude, '*');
     }
 
-    protected String replace(CharSequence str, int startInclude, int endExclude, char replacedChar) {
+    public static String replace(CharSequence str, int startInclude, int endExclude, char replacedChar) {
         if (isEmpty(str)) {
             return str(str);
         } else {
@@ -53,11 +44,11 @@ public class DataMaskAdapter implements DataMaskHandler {
         }
     }
 
-    protected int indexOf(CharSequence seq, int searchChar) {
+    public static int indexOf(CharSequence seq, int searchChar) {
         return isEmpty(seq) ? -1 : indexOf(seq, searchChar, 0);
     }
 
-    private int indexOf(final CharSequence cs, final int searchChar, int start) {
+    public static int indexOf(final CharSequence cs, final int searchChar, int start) {
         if (cs instanceof String) {
             return ((String)cs).indexOf(searchChar, start);
         } else {
@@ -76,15 +67,15 @@ public class DataMaskAdapter implements DataMaskHandler {
         }
     }
 
-    private boolean isEmpty(CharSequence cs) {
+    public static boolean isEmpty(CharSequence cs) {
         return cs == null || cs.length() == 0;
     }
 
-    protected String str(CharSequence cs) {
+    public static String str(CharSequence cs) {
         return cs == null ? null : cs.toString();
     }
 
-    protected String repeat(char c, int count) {
+    public static String repeat(char c, int count) {
         if (count <= 0) {
             return "";
         } else {
@@ -97,7 +88,7 @@ public class DataMaskAdapter implements DataMaskHandler {
         }
     }
 
-    protected boolean isBlank(CharSequence cs) {
+    public static boolean isBlank(CharSequence cs) {
         int strLen;
         if (cs != null && (strLen = cs.length()) != 0) {
             for(int i = 0; i < strLen; ++i) {
@@ -115,13 +106,4 @@ public class DataMaskAdapter implements DataMaskHandler {
         return str == null ? null : str.trim();
     }
 
-    @Override
-    public String getFieldType() {
-        throw new RuntimeException();
-    }
-
-    @Override
-    public String getId() {
-        return "";
-    }
 }
