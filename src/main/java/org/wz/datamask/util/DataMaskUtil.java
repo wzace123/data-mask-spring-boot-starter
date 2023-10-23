@@ -51,7 +51,7 @@ public class DataMaskUtil {
     private void convertObject(Object data) {
         Class<?> dataClass = data.getClass();
 
-        Set<Field> maskedFieldSet = ReflectionUtils.getFields(dataClass, ReflectionUtils.withAnnotation(MaskedField.class));
+        Set<Field> maskedFieldSet = ReflectionUtils.getAllFields(dataClass, ReflectionUtils.withAnnotation(MaskedField.class));
         if (!CollectionUtils.isEmpty(maskedFieldSet)) {
             for (Field field:maskedFieldSet) {
                 org.springframework.util.ReflectionUtils.makeAccessible(field);
@@ -60,7 +60,7 @@ public class DataMaskUtil {
             }
         }
 
-        Set<Field> maskedSet = ReflectionUtils.getFields(dataClass, ReflectionUtils.withAnnotation(Masked.class));
+        Set<Field> maskedSet = ReflectionUtils.getAllFields(dataClass, ReflectionUtils.withAnnotation(Masked.class));
         if (!CollectionUtils.isEmpty(maskedSet)) {
             for (Field field:maskedSet) {
                 org.springframework.util.ReflectionUtils.makeAccessible(field);

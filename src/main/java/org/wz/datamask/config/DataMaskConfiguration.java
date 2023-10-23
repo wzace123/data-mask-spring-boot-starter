@@ -4,10 +4,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.wz.datamask.advice.DataMaskAdvice;
 import org.wz.datamask.handle.DataMaskHandlerSelector;
-import org.wz.datamask.handle.impl.AddressHandler;
-import org.wz.datamask.handle.impl.IdCardNumHandler;
-import org.wz.datamask.handle.impl.MobileHandler;
-import org.wz.datamask.handle.impl.UserNameHandler;
+import org.wz.datamask.handle.impl.AddressMaskHandler;
+import org.wz.datamask.handle.impl.BankCardMaskHandler;
+import org.wz.datamask.handle.impl.CarLicenseMaskHandler;
+import org.wz.datamask.handle.impl.EmailMaskHandler;
+import org.wz.datamask.handle.impl.FixedPhoneMaskHandler;
+import org.wz.datamask.handle.impl.IdCardNumMaskHandler;
+import org.wz.datamask.handle.impl.Ipv4MaskHandler;
+import org.wz.datamask.handle.impl.Ipv6MaskHandler;
+import org.wz.datamask.handle.impl.MobilePhoneMaskHandler;
+import org.wz.datamask.handle.impl.PasswordMaskHandler;
+import org.wz.datamask.handle.impl.UserNameMaskHandler;
 import org.wz.datamask.util.DataMaskUtil;
 
 /**
@@ -17,23 +24,58 @@ import org.wz.datamask.util.DataMaskUtil;
 public class DataMaskConfiguration {
 
     @Bean
-    public AddressHandler addressHandler() {
-        return new AddressHandler();
+    public AddressMaskHandler addressHandler() {
+        return new AddressMaskHandler();
     }
 
     @Bean
-    public IdCardNumHandler idCardNumHandler() {
-        return new IdCardNumHandler();
+    public IdCardNumMaskHandler idCardNumHandler() {
+        return new IdCardNumMaskHandler();
     }
 
     @Bean
-    public MobileHandler mobileHandler() {
-        return new MobileHandler();
+    public MobilePhoneMaskHandler mobileHandler() {
+        return new MobilePhoneMaskHandler();
     }
 
     @Bean
-    public UserNameHandler userNameHandler() {
-        return new UserNameHandler();
+    public UserNameMaskHandler userNameHandler() {
+        return new UserNameMaskHandler();
+    }
+
+    @Bean
+    public BankCardMaskHandler bankCardMaskHandler() {
+        return new BankCardMaskHandler();
+    }
+
+    @Bean
+    public CarLicenseMaskHandler carLicenseMaskHandler() {
+        return new CarLicenseMaskHandler();
+    }
+
+    @Bean
+    public EmailMaskHandler emailMaskHandler() {
+        return new EmailMaskHandler();
+    }
+
+    @Bean
+    public FixedPhoneMaskHandler fixedPhoneMaskHandler() {
+        return new FixedPhoneMaskHandler();
+    }
+
+    @Bean
+    public Ipv4MaskHandler ipv4MaskHandler() {
+        return new Ipv4MaskHandler();
+    }
+
+    @Bean
+    public Ipv6MaskHandler ipv6MaskHandler() {
+        return new Ipv6MaskHandler();
+    }
+
+    @Bean
+    public PasswordMaskHandler passwordMaskHandler() {
+        return new PasswordMaskHandler();
     }
 
     @Bean

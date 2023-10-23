@@ -1,12 +1,11 @@
 package org.wz.datamask.enums;
 
 /**
- *
+ * Mask Type
  */
 public enum MaskedType {
 
-    USER_ID,
-    CHINESE_NAME,
+    USER_NAME,
     ID_CARD,
     FIXED_PHONE,
     MOBILE_PHONE,

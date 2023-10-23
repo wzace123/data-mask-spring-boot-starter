@@ -7,8 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.wz.datamask.annotation.Masked;
 import org.wz.datamask.util.DataMaskUtil;
-
-import javax.annotation.Resource;
+import org.wz.datamask.util.ObjectUtil;
 
 /**
  *
@@ -31,7 +30,11 @@ public class DataMaskAdvice {
     @Around("pointcut() &&  @annotation(masked)")
     public Object dataMaskedAroundAdvice(ProceedingJoinPoint proceedingJoinPoint, Masked masked) throws Throwable {
         Object data = proceedingJoinPoint.proceed();
-        dataMaskUtil.convert(data);
+        try {
+            dataMaskUtil.convert(ObjectUtil.getValue(data, masked));
+        } catch (Exception e) {
+            log.error("data masking error! data:{}", data, e);
+        }
         return data;
     }
 

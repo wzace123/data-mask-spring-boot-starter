@@ -1,13 +1,13 @@
 package org.wz.datamask.handle.impl;
 
 import org.wz.datamask.enums.MaskedType;
-import org.wz.datamask.handle.AbstractMaskedHandler;
+import org.wz.datamask.handle.AbstractMaskHandler;
 import org.wz.datamask.util.StringUtil;
 
 /**
- * 保留前三后四，中间4位用****展示
+ * Mobile Phone mask
  */
-public class MobileHandler extends AbstractMaskedHandler {
+public class MobilePhoneMaskHandler extends AbstractMaskHandler {
 
     @Override
     public String doMask(String mobile) {

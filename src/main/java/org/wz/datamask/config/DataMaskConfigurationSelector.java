@@ -20,13 +20,6 @@ package org.wz.datamask.config;
 import org.springframework.context.annotation.DeferredImportSelector;
 import org.springframework.core.Ordered;
 import org.springframework.core.type.AnnotationMetadata;
-import org.wz.datamask.advice.DataMaskAdvice;
-import org.wz.datamask.handle.DataMaskHandlerSelector;
-import org.wz.datamask.handle.impl.AddressHandler;
-import org.wz.datamask.handle.impl.IdCardNumHandler;
-import org.wz.datamask.handle.impl.MobileHandler;
-import org.wz.datamask.handle.impl.UserNameHandler;
-import org.wz.datamask.util.DataMaskUtil;
 
 /**
  * DtpConfigurationSelector related

@@ -3,9 +3,11 @@ package org.wz.datamask.entity;
 import org.wz.datamask.annotation.MaskedField;
 import org.wz.datamask.enums.MaskedType;
 
-public class User {
+import java.io.Serializable;
 
-    @MaskedField(value = MaskedType.CHINESE_NAME)
+public class User implements Serializable {
+
+    @MaskedField(value = MaskedType.USER_NAME)
     private String name;
 
     @MaskedField(value = MaskedType.MOBILE_PHONE)

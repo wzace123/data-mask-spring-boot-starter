@@ -106,4 +106,18 @@ public class StringUtil {
         return str == null ? null : str.trim();
     }
 
+    public static String subBefore(CharSequence string, char separator, boolean isLastSeparator) {
+        if (isEmpty(string)) {
+            return null == string ? null : "";
+        } else {
+            String str = string.toString();
+            int pos = isLastSeparator ? str.lastIndexOf(separator) : str.indexOf(separator);
+            if (-1 == pos) {
+                return str;
+            } else {
+                return 0 == pos ? "" : str.substring(0, pos);
+            }
+        }
+    }
+
 }
