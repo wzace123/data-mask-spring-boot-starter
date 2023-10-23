@@ -1,13 +1,13 @@
 package org.wz.datamask.handle.impl;
 
-import org.wz.datamask.enums.FieldType;
-import org.wz.datamask.handle.DataMaskHandlerAdapter;
+import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.handle.AbstractMaskedHandler;
 import org.wz.datamask.util.StringUtil;
 
 /**
  * 只显示首字母
  */
-public class UserNameHandler extends DataMaskHandlerAdapter {
+public class UserNameHandler extends AbstractMaskedHandler {
 
     @Override
     public String doMask(String name) {
@@ -16,6 +16,6 @@ public class UserNameHandler extends DataMaskHandlerAdapter {
 
     @Override
     public String getFieldType() {
-        return FieldType.USER_NAME.name();
+        return MaskedType.CHINESE_NAME.name();
     }
 }

@@ -1,14 +1,14 @@
 package org.wz.datamask.entity;
 
 import org.wz.datamask.annotation.MaskedField;
-import org.wz.datamask.enums.FieldType;
+import org.wz.datamask.enums.MaskedType;
 
 public class User {
 
-    @MaskedField(value = FieldType.USER_NAME)
+    @MaskedField(value = MaskedType.CHINESE_NAME)
     private String name;
 
-    @MaskedField(value = FieldType.MOBILE)
+    @MaskedField(value = MaskedType.MOBILE_PHONE)
     private String mobile;
 
     public User(String name, String mobile) {

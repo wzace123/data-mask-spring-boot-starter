@@ -1,13 +1,13 @@
 package org.wz.datamask.handle.impl;
 
-import org.wz.datamask.enums.FieldType;
-import org.wz.datamask.handle.DataMaskHandlerAdapter;
+import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.handle.AbstractMaskedHandler;
 import org.wz.datamask.util.StringUtil;
 
 /**
  * Address详细地址仅保留前5个明文，剩余*脱敏
  */
-public class AddressHandler extends DataMaskHandlerAdapter {
+public class AddressHandler extends AbstractMaskedHandler {
 
     @Override
     public String doMask(String address) {
@@ -24,6 +24,6 @@ public class AddressHandler extends DataMaskHandlerAdapter {
 
     @Override
     public String getFieldType() {
-        return FieldType.ADDRESS.name();
+        return MaskedType.ADDRESS.name();
     }
 }

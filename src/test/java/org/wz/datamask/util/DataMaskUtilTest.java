@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.wz.datamask.entity.User;
-import org.wz.datamask.enums.FieldType;
+import org.wz.datamask.enums.MaskedType;
 import org.wz.datamask.handle.DataMaskHandler;
 import org.wz.datamask.handle.DataMaskHandlerSelector;
 import org.wz.datamask.handle.impl.AddressHandler;
@@ -27,10 +27,10 @@ public class DataMaskUtilTest {
         DataMaskHandlerSelector selector = new DataMaskHandlerSelector();
 
         Map<String, DataMaskHandler> serviceMap = new HashMap<>();
-        serviceMap.put("_" + FieldType.USER_NAME.name(), new UserNameHandler());
-        serviceMap.put("_" + FieldType.ID_CARD.name(), new IdCardNumHandler());
-        serviceMap.put("_" + FieldType.MOBILE.name(), new MobileHandler());
-        serviceMap.put("_" + FieldType.ADDRESS.name(), new AddressHandler());
+        serviceMap.put("_" + MaskedType.CHINESE_NAME.name(), new UserNameHandler());
+        serviceMap.put("_" + MaskedType.ID_CARD.name(), new IdCardNumHandler());
+        serviceMap.put("_" + MaskedType.MOBILE_PHONE.name(), new MobileHandler());
+        serviceMap.put("_" + MaskedType.ADDRESS.name(), new AddressHandler());
         selector.setServiceMap(serviceMap);
         dataMaskUtil = new DataMaskUtil(selector);
         user = new User("mick", "18827011451");
