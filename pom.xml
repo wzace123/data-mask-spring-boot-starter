@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wz</groupId>
-	<artifactId>data-masking</artifactId>
+	<artifactId>data-mask-spring-boot-starter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>data-masking</name>
-	<description>Data Masking Util</description>
+	<name>data-mask-spring-boot-starter</name>
+	<description>data-mask-spring-boot-starter</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<org.reflections.version>0.10.2</org.reflections.version>
