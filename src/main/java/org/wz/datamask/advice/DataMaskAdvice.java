@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.wz.datamask.annotation.Masked;
+import org.wz.datamask.util.ClassFieldsLocalCache;
 import org.wz.datamask.util.DataMaskUtil;
 import org.wz.datamask.util.ObjectUtil;
 
@@ -33,7 +34,9 @@ public class DataMaskAdvice {
         try {
             dataMaskUtil.convert(ObjectUtil.getValue(data, masked));
         } catch (Exception e) {
-            log.error("data masking error! data:{}", data, e);
+            log.error("dataMaskedAroundAdvice execute Exception! data:{}", data, e);
+        } finally {
+            ClassFieldsLocalCache.clean();
         }
         return data;
     }

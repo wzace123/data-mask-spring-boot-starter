@@ -1,5 +1,6 @@
 package org.wz.datamask.util;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,11 @@ public class DataMaskUtilTest {
         serviceMap.put("myId_" + FieldType.PASSWORD, new MyPasswordDataMaskHandler());
         selector.setServiceMap(serviceMap);
         dataMaskUtil = new DataMaskUtil(selector);
+    }
+
+    @After
+    public void cleanCache() {
+        ClassFieldsLocalCache.clean();
     }
 
     @Test
@@ -128,7 +134,7 @@ public class DataMaskUtilTest {
         userList.add(user2);
         PageWrapper pageWapper = new PageWrapper<User>(userList, userList.size());
         ResultWrapper wapper = new ResultWrapper(0, "this is message", pageWapper, true);
-        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "multipleNestObjectDataMaskUsage1Test").getAnnotation(Masked.class);
+        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "multipleNestObjectDataMaskTest1").getAnnotation(Masked.class);
         dataMaskUtil.convert(ObjectUtil.getValue(wapper, masked));
         Assert.assertEquals("188****1451", user.getMobile());
         Assert.assertEquals("m***", user.getName());
@@ -149,7 +155,7 @@ public class DataMaskUtilTest {
         userList.add(user2);
         UserGroup userGroup = new UserGroup(userList);
         UserGroupWrapper wapper = new UserGroupWrapper(userGroup);
-        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "multipleNestObjectDataMaskUsage2Test").getAnnotation(Masked.class);
+        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "multipleNestObjectDataMaskTest2").getAnnotation(Masked.class);
         dataMaskUtil.convert(ObjectUtil.getValue(wapper, masked));
         Assert.assertEquals("188****1451", user.getMobile());
         Assert.assertEquals("m***", user.getName());
