@@ -1,16 +1,16 @@
 package org.wz.datamask.entity;
 
 import org.wz.datamask.annotation.MaskedField;
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
 
-    @MaskedField(value = MaskedType.USER_NAME)
+    @MaskedField(value = FieldType.USER_NAME)
     private String name;
 
-    @MaskedField(value = MaskedType.MOBILE_PHONE)
+    @MaskedField(value = FieldType.MOBILE_PHONE)
     private String mobile;
 
     public User(String name, String mobile) {

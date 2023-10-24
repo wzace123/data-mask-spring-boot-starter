@@ -1,6 +1,6 @@
 package org.wz.datamask.handle.impl;
 
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 import org.wz.datamask.handle.AbstractMaskHandler;
 import org.wz.datamask.util.StringUtil;
 
@@ -21,7 +21,7 @@ public class EmailMaskHandler extends AbstractMaskHandler {
 
     @Override
     public String getFieldType() {
-        return MaskedType.EMAIL.name();
+        return FieldType.EMAIL;
     }
 
 }

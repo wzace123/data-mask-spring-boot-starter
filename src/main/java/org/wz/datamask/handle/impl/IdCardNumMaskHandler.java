@@ -1,6 +1,6 @@
 package org.wz.datamask.handle.impl;
 
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 import org.wz.datamask.handle.AbstractMaskHandler;
 import org.wz.datamask.util.StringUtil;
 
@@ -16,7 +16,7 @@ public class IdCardNumMaskHandler extends AbstractMaskHandler {
 
     @Override
     public String getFieldType() {
-        return MaskedType.ID_CARD.name();
+        return FieldType.ID_CARD;
     }
     
 }

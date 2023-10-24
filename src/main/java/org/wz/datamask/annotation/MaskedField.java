@@ -1,7 +1,5 @@
 package org.wz.datamask.annotation;
 
-import org.wz.datamask.enums.MaskedType;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -19,12 +17,12 @@ import java.lang.annotation.Target;
 public @interface MaskedField {
 
     /**
-     * 字段类型
+     * Field Type
      */
-    MaskedType value();
+    String value();
 
     /**
-     * 自定义id
+     * Custom Id
      * @return
      */
     String id() default "";

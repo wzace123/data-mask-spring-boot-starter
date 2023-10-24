@@ -1,14 +1,14 @@
 package org.wz.datamask.entity;
 
 import org.wz.datamask.annotation.MaskedField;
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 
 public class VipUser extends User {
 
-    @MaskedField(value = MaskedType.ADDRESS)
+    @MaskedField(value = FieldType.ADDRESS)
     private String address;
 
-    @MaskedField(value = MaskedType.ID_CARD)
+    @MaskedField(value = FieldType.ID_CARD)
     private String idCard;
 
     public VipUser(String name, String mobile, String address, String idCard) {

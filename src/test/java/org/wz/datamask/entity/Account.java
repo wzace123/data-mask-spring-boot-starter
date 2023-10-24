@@ -1,32 +1,32 @@
 package org.wz.datamask.entity;
 
 import org.wz.datamask.annotation.MaskedField;
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 
 import java.io.Serializable;
 
 public class Account implements Serializable {
-    @MaskedField(value = MaskedType.USER_NAME)
+    @MaskedField(value = FieldType.USER_NAME)
     private String name;
-    @MaskedField(value = MaskedType.ID_CARD)
+    @MaskedField(value = FieldType.ID_CARD)
     private String idCard;
-    @MaskedField(value = MaskedType.FIXED_PHONE)
+    @MaskedField(value = FieldType.FIXED_PHONE)
     private String fixedPhone;
-    @MaskedField(value = MaskedType.MOBILE_PHONE)
+    @MaskedField(value = FieldType.MOBILE_PHONE)
     private String mobilePhone;
-    @MaskedField(value = MaskedType.ADDRESS)
+    @MaskedField(value = FieldType.ADDRESS)
     private String address;
-    @MaskedField(value = MaskedType.EMAIL)
+    @MaskedField(value = FieldType.EMAIL)
     private String email;
-    @MaskedField(value = MaskedType.PASSWORD)
+    @MaskedField(value = FieldType.PASSWORD)
     private String password;
-    @MaskedField(value = MaskedType.CAR_LICENSE)
+    @MaskedField(value = FieldType.CAR_LICENSE)
     private String carLicense;
-    @MaskedField(value = MaskedType.BANK_CARD)
+    @MaskedField(value = FieldType.BANK_CARD)
     private String bankCard;
-    @MaskedField(value = MaskedType.IPV4)
+    @MaskedField(value = FieldType.IPV4)
     private String ipv4;
-    @MaskedField(value = MaskedType.IPV6)
+    @MaskedField(value = FieldType.IPV6)
     private String ipv6;
 
     public String getName() {

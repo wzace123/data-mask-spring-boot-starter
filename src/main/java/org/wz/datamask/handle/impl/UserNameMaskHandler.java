@@ -1,6 +1,6 @@
 package org.wz.datamask.handle.impl;
 
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 import org.wz.datamask.handle.AbstractMaskHandler;
 import org.wz.datamask.util.StringUtil;
 
@@ -16,6 +16,6 @@ public class UserNameMaskHandler extends AbstractMaskHandler {
 
     @Override
     public String getFieldType() {
-        return MaskedType.USER_NAME.name();
+        return FieldType.USER_NAME;
     }
 }

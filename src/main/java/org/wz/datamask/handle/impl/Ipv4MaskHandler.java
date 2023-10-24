@@ -1,7 +1,6 @@
 package org.wz.datamask.handle.impl;
 
-import org.springframework.util.StringUtils;
-import org.wz.datamask.enums.MaskedType;
+import org.wz.datamask.constant.FieldType;
 import org.wz.datamask.handle.AbstractMaskHandler;
 import org.wz.datamask.util.StringUtil;
 
@@ -17,7 +16,7 @@ public class Ipv4MaskHandler extends AbstractMaskHandler {
 
     @Override
     public String getFieldType() {
-        return MaskedType.IPV4.name();
+        return FieldType.IPV4;
     }
 
 }

@@ -72,7 +72,7 @@ public class DataMaskUtil {
 
     private Object doMask(Object value, MaskedField maskedField) {
         if (value != null && maskedField != null && value instanceof String && StringUtils.hasText((String) value)) {
-            return dataMaskHandlerSelector.doMask(maskedField.value().name(), maskedField.id(), value);
+            return dataMaskHandlerSelector.doMask(maskedField.value(), maskedField.id(), value);
         }
         return value;
     }
