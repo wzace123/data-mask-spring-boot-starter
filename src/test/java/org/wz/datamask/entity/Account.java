@@ -29,6 +29,9 @@ public class Account implements Serializable {
     @MaskedField(value = FieldType.IPV6)
     private String ipv6;
 
+    @MaskedField(value = FieldType.PASSWORD, id = "myId")
+    private String myPassword;
+
     public String getName() {
         return name;
     }
@@ -115,6 +118,14 @@ public class Account implements Serializable {
 
     public void setIpv6(String ipv6) {
         this.ipv6 = ipv6;
+    }
+
+    public String getMyPassword() {
+        return myPassword;
+    }
+
+    public void setMyPassword(String myPassword) {
+        this.myPassword = myPassword;
     }
 
     @Override

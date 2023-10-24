@@ -15,6 +15,7 @@ import org.wz.datamask.entity.UserGroupWrapper;
 import org.wz.datamask.entity.VipUser;
 import org.wz.datamask.handle.DataMaskHandler;
 import org.wz.datamask.handle.DataMaskHandlerSelector;
+import org.wz.datamask.handle.MyPasswordDataMaskHandler;
 import org.wz.datamask.handle.impl.AddressMaskHandler;
 import org.wz.datamask.handle.impl.BankCardMaskHandler;
 import org.wz.datamask.handle.impl.CarLicenseMaskHandler;
@@ -51,6 +52,7 @@ public class DataMaskUtilTest {
         serviceMap.put("_" + FieldType.BANK_CARD, new BankCardMaskHandler());
         serviceMap.put("_" + FieldType.FIXED_PHONE, new FixedPhoneMaskHandler());
         serviceMap.put("_" + FieldType.EMAIL, new EmailMaskHandler());
+        serviceMap.put("myId_" + FieldType.PASSWORD, new MyPasswordDataMaskHandler());
         selector.setServiceMap(serviceMap);
         dataMaskUtil = new DataMaskUtil(selector);
     }
@@ -118,7 +120,7 @@ public class DataMaskUtilTest {
 
     @Masked(value = "data.content")
     @Test
-    public void multipleNestObjectDataMaskUsage1Test() {
+    public void multipleNestObjectDataMaskTest1() {
         VipUser user = new VipUser("mick", "18827011451", "湖北省武汉市黄鹤楼一栋101", "4321453123435667");
         VipUser user2 = new VipUser("nick", "18827011452", "湖北省武汉市黄鹤楼一栋102", "4321453123435668");
         List<User> userList = new ArrayList<>();
@@ -139,7 +141,7 @@ public class DataMaskUtilTest {
     }
 
     @Test
-    public void multipleNestObjectDataMaskUsage2Test() {
+    public void multipleNestObjectDataMaskTest2() {
         VipUser user = new VipUser("mick", "18827011451", "湖北省武汉市黄鹤楼一栋101", "4321453123435667");
         VipUser user2 = new VipUser("nick", "18827011452", "湖北省武汉市黄鹤楼一栋102", "4321453123435668");
         List<User> userList = new ArrayList<>();
@@ -173,6 +175,7 @@ public class DataMaskUtilTest {
         account.setBankCard("6845987565214587");
         account.setIpv4("192.169.31.12");
         account.setIpv6("2001:470:c:1818::2");
+        account.setMyPassword("test password");
         Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "allMaskTypeTest").getAnnotation(Masked.class);
         dataMaskUtil.convert(ObjectUtil.getValue(account, masked));
         Assert.assertEquals("李**", account.getName());
@@ -186,6 +189,7 @@ public class DataMaskUtilTest {
         Assert.assertEquals("京AD****8", account.getCarLicense());
         Assert.assertEquals("6845********4587", account.getBankCard());
         Assert.assertEquals("湖北省武汉*********", account.getAddress());
+        Assert.assertEquals("MyPasswordMaskHandler", account.getMyPassword());
     }
 
 }
