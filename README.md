@@ -11,9 +11,9 @@ data-mask-spring-boot-starter
 * 添加依赖:
 ```xml
 <dependency>
-    <groupId>com.wz</groupId>
+    <groupId>org.wz</groupId>
     <artifactId>data-mask-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
