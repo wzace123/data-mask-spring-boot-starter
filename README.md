@@ -31,8 +31,8 @@ public class DataMaskApplication {
 ```java
 @Masked
 public User userInfo() {
-        //...
-        }
+    //...
+}
 ```
 * 使用`@MaskedField`标记接口数据脱敏字段，并定义字段需要的脱敏处理策略FieldType
 ```java
@@ -58,16 +58,16 @@ public class User implements Serializable {
 ```java
 @Masked // look here
 public User userInfo() {
-        //...
-        }
+    //...
+}
 ```
 
 * 嵌套对象使用`@Masked`如下所示，会对UserGroupWrapper.userGroup.userList数据进行脱敏处理
 ```java
 @Masked
 public UserGroupWrapper userGroupWrapper() {
-        //...
-        }
+    //...
+}
 
 public class UserGroupWrapper implements Serializable {
 
@@ -88,8 +88,8 @@ public class UserGroup implements Serializable {
 ```java
 @Masked(value="data.content") // look here
 public ResultWrapper<PageWrapper<User>> userPageList() {
-        //...
-        }
+    //...
+}
 
 // third class file we can not add @Masked on the data field
 public class ResultWrapper<T> implements Serializable {
