@@ -16,4 +16,6 @@ public @interface Masked {
 
     String value() default "";
 
+    String[] groups() default {};
+
 }

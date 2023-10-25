@@ -60,17 +60,21 @@ public class DataMaskUtilTest {
 
     @After
     public void cleanCache() {
-        ClassFieldsLocalCache.clean();
+        ThreadLocalCache.clean();
     }
 
+    @Masked
     @Test
     public void simpleObjectDataMaskTest() {
         User user = new User("mick", "18827011451");
+        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "simpleNestObjectDataMaskTest").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(user);
         Assert.assertEquals("188****1451", user.getMobile());
         Assert.assertEquals("m***", user.getName());
     }
 
+    @Masked
     @Test
     public void simpleObjectListDataMaskTest() {
         User user1 = new User("mick", "18827011451");
@@ -81,7 +85,8 @@ public class DataMaskUtilTest {
         userList.add(user1);
         userList.add(user2);
         userList.add(user3);
-
+        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "simpleNestObjectDataMaskTest").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(userList);
         Assert.assertEquals("188****1451", user1.getMobile());
         Assert.assertEquals("m***", user1.getName());
@@ -91,6 +96,7 @@ public class DataMaskUtilTest {
         Assert.assertEquals("n***", user3.getName());
     }
 
+    @Masked
     @Test
     public void simpleObjectMapDataMaskTest() {
         User user1 = new User("mick", "18827011451");
@@ -101,7 +107,8 @@ public class DataMaskUtilTest {
         map.put("user1", user1);
         map.put("user2", user2);
         map.put("user3", user3);
-
+        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "simpleNestObjectDataMaskTest").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(map);
         Assert.assertEquals("188****1451", user1.getMobile());
         Assert.assertEquals("m***", user1.getName());
@@ -117,6 +124,7 @@ public class DataMaskUtilTest {
         VipUser user = new VipUser("mick", "18827011451", "湖北省武汉市黄鹤楼一栋101", "4321453123435667");
         ResultWrapper wapper = new ResultWrapper(0, "this is message", user, true);
         Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "simpleNestObjectDataMaskTest").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(ObjectUtil.getValue(wapper, masked));
         Assert.assertEquals("188****1451", user.getMobile());
         Assert.assertEquals("m***", user.getName());
@@ -135,6 +143,7 @@ public class DataMaskUtilTest {
         PageWrapper pageWapper = new PageWrapper<User>(userList, userList.size());
         ResultWrapper wapper = new ResultWrapper(0, "this is message", pageWapper, true);
         Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "multipleNestObjectDataMaskTest1").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(ObjectUtil.getValue(wapper, masked));
         Assert.assertEquals("188****1451", user.getMobile());
         Assert.assertEquals("m***", user.getName());
@@ -146,6 +155,7 @@ public class DataMaskUtilTest {
         Assert.assertEquals("4**************8", user2.getIdCard());
     }
 
+    @Masked
     @Test
     public void multipleNestObjectDataMaskTest2() {
         VipUser user = new VipUser("mick", "18827011451", "湖北省武汉市黄鹤楼一栋101", "4321453123435667");
@@ -156,6 +166,7 @@ public class DataMaskUtilTest {
         UserGroup userGroup = new UserGroup(userList);
         UserGroupWrapper wapper = new UserGroupWrapper(userGroup);
         Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "multipleNestObjectDataMaskTest2").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(ObjectUtil.getValue(wapper, masked));
         Assert.assertEquals("188****1451", user.getMobile());
         Assert.assertEquals("m***", user.getName());
@@ -167,6 +178,7 @@ public class DataMaskUtilTest {
         Assert.assertEquals("4**************8", user2.getIdCard());
     }
 
+    @Masked
     @Test
     public void allMaskTypeTest() {
         Account account = new Account();
@@ -183,6 +195,7 @@ public class DataMaskUtilTest {
         account.setIpv6("2001:470:c:1818::2");
         account.setMyPassword("test password");
         Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "allMaskTypeTest").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
         dataMaskUtil.convert(ObjectUtil.getValue(account, masked));
         Assert.assertEquals("李**", account.getName());
         Assert.assertEquals("**********", account.getPassword());
@@ -196,6 +209,39 @@ public class DataMaskUtilTest {
         Assert.assertEquals("6845********4587", account.getBankCard());
         Assert.assertEquals("湖北省武汉*********", account.getAddress());
         Assert.assertEquals("MyPasswordMaskHandler", account.getMyPassword());
+    }
+
+    @Masked(groups = {"testGroup", "testGroup2"})
+    @Test
+    public void allMaskTypeGroupTest() {
+        Account account = new Account();
+        account.setName("李大刀");
+        account.setIdCard("426587966548523658");
+        account.setFixedPhone("81818989");
+        account.setMobilePhone("18879546582");
+        account.setAddress("湖北省武汉市黄鹤楼一栋101");
+        account.setEmail("testab@Gmail.com");
+        account.setPassword("Wlsfk#$123");
+        account.setCarLicense("京AD88888");
+        account.setBankCard("6845987565214587");
+        account.setIpv4("192.169.31.12");
+        account.setIpv6("2001:470:c:1818::2");
+        account.setMyPassword("test password");
+        Masked masked = ReflectionUtils.findMethod(DataMaskUtilTest.class, "allMaskTypeGroupTest").getAnnotation(Masked.class);
+        ThreadLocalCache.setMasked(masked);
+        dataMaskUtil.convert(ObjectUtil.getValue(account, masked));
+        Assert.assertEquals("李**", account.getName());
+        Assert.assertEquals("Wlsfk#$123", account.getPassword());
+        Assert.assertEquals("188****6582", account.getMobilePhone());
+        Assert.assertEquals("2001:470:c:1818::2", account.getIpv6());
+        Assert.assertEquals("192.169.31.12", account.getIpv4());
+        Assert.assertEquals("4****************8", account.getIdCard());
+        Assert.assertEquals("8181**89", account.getFixedPhone());
+        Assert.assertEquals("testab@Gmail.com", account.getEmail());
+        Assert.assertEquals("京AD88888", account.getCarLicense());
+        Assert.assertEquals("6845987565214587", account.getBankCard());
+        Assert.assertEquals("湖北省武汉*********", account.getAddress());
+        Assert.assertEquals("test password", account.getMyPassword());
     }
 
 }

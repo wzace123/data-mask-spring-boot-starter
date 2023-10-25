@@ -9,10 +9,14 @@ import org.wz.datamask.annotation.MaskedField;
 import org.wz.datamask.handle.DataMaskHandlerSelector;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -52,10 +56,11 @@ public class DataMaskUtil {
     private void convertObject(Object data) {
         Class<?> dataClass = data.getClass();
 
-        Set<Field> maskedFieldSet = ClassFieldsLocalCache.getFields(dataClass, MaskedField.class);
+        Set<Field> maskedFieldSet = ThreadLocalCache.getFields(dataClass, MaskedField.class);
         if (maskedFieldSet == null) {
             maskedFieldSet = getFields(dataClass, MaskedField.class);
-            ClassFieldsLocalCache.setFields(dataClass, MaskedField.class, maskedFieldSet);
+            maskedFieldSet = groupFilter(maskedFieldSet);
+            ThreadLocalCache.setFields(dataClass, MaskedField.class, maskedFieldSet);
         }
         if (!CollectionUtils.isEmpty(maskedFieldSet)) {
             for (Field field:maskedFieldSet) {
@@ -65,10 +70,10 @@ public class DataMaskUtil {
             }
         }
 
-        Set<Field> maskedSet = ClassFieldsLocalCache.getFields(dataClass, Masked.class);
+        Set<Field> maskedSet = ThreadLocalCache.getFields(dataClass, Masked.class);
         if (maskedSet == null) {
             maskedSet = getFields(dataClass, Masked.class);
-            ClassFieldsLocalCache.setFields(dataClass, Masked.class, maskedSet);
+            ThreadLocalCache.setFields(dataClass, Masked.class, maskedSet);
         }
         if (!CollectionUtils.isEmpty(maskedSet)) {
             for (Field field:maskedSet) {
@@ -77,6 +82,23 @@ public class DataMaskUtil {
                 convert(value);
             }
         }
+    }
+
+    private Set<Field> groupFilter(Set<Field> maskedFieldSet) {
+        Masked masked = ThreadLocalCache.getMasked();
+        if (masked.groups().length == 0) {
+            return maskedFieldSet;
+        }
+        return maskedFieldSet.stream().filter(f -> {
+            for (String fieldGroup : f.getAnnotation(MaskedField.class).groups()) {
+                for (String group : masked.groups()) {
+                    if (Objects.equals(fieldGroup, group)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }).collect(Collectors.toSet());
     }
 
     private Set<Field> getFields(Class dataClass, Class annotationClass) {

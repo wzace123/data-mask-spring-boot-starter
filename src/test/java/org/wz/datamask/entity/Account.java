@@ -6,15 +6,15 @@ import org.wz.datamask.constant.FieldType;
 import java.io.Serializable;
 
 public class Account implements Serializable {
-    @MaskedField(value = FieldType.USER_NAME)
+    @MaskedField(value = FieldType.USER_NAME, groups = {"testGroup"})
     private String name;
-    @MaskedField(value = FieldType.ID_CARD)
+    @MaskedField(value = FieldType.ID_CARD, groups = {"testGroup"})
     private String idCard;
-    @MaskedField(value = FieldType.FIXED_PHONE)
+    @MaskedField(value = FieldType.FIXED_PHONE, groups = {"testGroup"})
     private String fixedPhone;
-    @MaskedField(value = FieldType.MOBILE_PHONE)
+    @MaskedField(value = FieldType.MOBILE_PHONE, groups = {"testGroup2"})
     private String mobilePhone;
-    @MaskedField(value = FieldType.ADDRESS)
+    @MaskedField(value = FieldType.ADDRESS, groups = {"testGroup2"})
     private String address;
     @MaskedField(value = FieldType.EMAIL)
     private String email;

@@ -112,7 +112,22 @@ public class PageWrapper<T> implements Serializable {
 }
 
 ```
+* 分组脱敏，指定分组名称`@Masked(group={xxx,xxx})`后，只会对属于指定分组的字段进行脱敏处理
+```java
+@Masked(groups = {"myGroup1"}) // add group
+public User userInfo() {
+    //...
+}
 
+public class User implements Serializable {
+
+    @MaskedField(value = FieldType.USER_NAME, groups = {"myGroup1"}) // will be masked
+    private String name;
+
+    @MaskedField(value = FieldType.ID_CARD, groups = {"myGroup2"}) // not same group,do not mask
+    private String idCard;
+}
+```
 
 ### 如何使用`@MaskedField`
 * 使用`@MaskedField`指定需要脱敏字段

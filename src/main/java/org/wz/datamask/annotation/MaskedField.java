@@ -27,4 +27,10 @@ public @interface MaskedField {
      */
     String id() default "";
 
+    /**
+     * groups
+     * @return
+     */
+    String[] groups() default {};
+
 }
